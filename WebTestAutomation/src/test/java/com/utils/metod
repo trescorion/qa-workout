@@ -1,0 +1,20 @@
+    public void listGranolaCardDetails() {
+        // Find all granola-related parent divs
+        List<WebElement> granolaCards = driver.findElements(granolaSubcategoryLocator);
+
+        for (WebElement granolaCard : granolaCards) {
+            try {
+                // Find the child elements of "CardWrapper" within the matched granola card
+                WebElement cardWrapper = granolaCard.findElement(cardWrapperLocator);
+                List<WebElement> childElements = cardWrapper.findElements(By.xpath("./*"));
+
+                System.out.println("Granola Card has " + childElements.size() + " child elements:");
+                for (WebElement child : childElements) {
+                    System.out.println(child.getAttribute("outerHTML"));
+                }
+            } catch (Exception e) {
+                System.out.println("Error processing card: " + e.getMessage());
+            }
+        }
+
+    }
